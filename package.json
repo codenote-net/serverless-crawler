@@ -1,0 +1,23 @@
+{
+  "name": "serverless-crawler",
+  "version": "1.0.0",
+  "description": "crawler with serverless framework.",
+  "main": "handler.js",
+  "dependencies": {
+    "serverless": "^1.35.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codenote-net/serverless-crawler.git"
+  },
+  "author": "Tadashi Shigeoka",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/codenote-net/serverless-crawler/issues"
+  },
+  "homepage": "https://github.com/codenote-net/serverless-crawler#readme"
+}

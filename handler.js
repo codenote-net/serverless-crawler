@@ -6,7 +6,7 @@ const launchChrome = require('@serverless-chrome/lambda');
 const CDP = require('chrome-remote-interface');
 const puppeteer = require('puppeteer');
 
-module.exports.hello = async (event, context) => {
+module.exports.crawling = async (event, context) => {
   let slsChrome = null;
   let browser = null;
   let page = null;

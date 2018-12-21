@@ -55,8 +55,9 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  crawling:
+    handler: handler.crawling
+    timeout: 60 # The default is 6 seconds. Note: API Gateway current maximum is 30 seconds
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

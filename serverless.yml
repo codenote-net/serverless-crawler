@@ -27,6 +27,15 @@ provider:
 
 # you can add statements to the Lambda function's IAM Role here
   iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DB_TABLE_WEBSITES}"
     - Effect: "Allow"
       Action:
         - "s3:ListBucket"
@@ -92,6 +101,23 @@ functions:
 # you can add CloudFormation resource templates here
 resources:
   Resources:
+    WebsitesTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${self:provider.environment.DB_TABLE_WEBSITES}
+        AttributeDefinitions:
+          -
+            AttributeName: fqdn # https://ja.wikipedia.org/wiki/Fully_Qualified_Domain_Name
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: fqdn
+            KeyType: HASH # Partition key
+        BillingMode: PAY_PER_REQUEST # for On-Demand setting
+        # ProvisionedThroughput: # for Provisioned setting
+          # ReadCapacityUnits: 1
+          # WriteCapacityUnits: 1
     S3BucketResource:
       Type: AWS::S3::Bucket
       Properties:

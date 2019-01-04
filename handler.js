@@ -6,6 +6,7 @@ const launchChrome = require('@serverless-chrome/lambda');
 const CDP = require('chrome-remote-interface');
 const puppeteer = require('puppeteer');
 const AWS = require('aws-sdk');
+const cheerio = require('cheerio');
 
 module.exports.crawling = async (event, context) => {
   let slsChrome = null;
@@ -50,8 +51,15 @@ module.exports.crawling = async (event, context) => {
       Body: html
     }).promise();
 
+    const urls = [];
+    const $ = cheerio.load(html);
+    $('section').find('.entrylist-contents-title').each((i, elem) => {
+      urls.push($(elem).find('a').attr('href'));
+    });
+
     console.log({
       result: 'OK',
+      urls: urls,
       s3response: response
     });
   } catch (err) {

@@ -43,6 +43,7 @@ provider:
 # you can define service wide environment variables here
   environment:
     S3_BUCKET: serverless-crawler-${opt:stage, self:provider.stage}
+    DB_TABLE_WEBSITES: websites-${opt:stage, self:provider.stage}
 
 # you can add packaging information here
 #package:
